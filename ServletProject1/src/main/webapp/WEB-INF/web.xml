@@ -38,7 +38,7 @@
     
   <servlet-mapping>
   	<servlet-name>ex2</servlet-name>
-  	<url-pattern>/example21.do</url-pattern>
+  	<url-pattern>/example2.do</url-pattern>
   </servlet-mapping>
   
   

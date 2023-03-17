@@ -92,7 +92,7 @@ public class ServletEx2 extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 			
-				
+		
 		/* Dynamic Web Project(동적 웹 프로젝트, 동적 웹 애플리케이션)
 		 * 
 		 * - 요청에 따라서 응답되는 화면(HTML)을 
@@ -100,6 +100,7 @@ public class ServletEx2 extends HttpServlet {
 		 *   클라이언트에게 응답하는 프로젝트
 		 */
 
+		
 
 		
 		
