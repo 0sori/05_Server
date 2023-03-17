@@ -1,0 +1,33 @@
+package edu.kh.jdbc.common;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+
+public class LoadXMLFile {
+
+	public static void main(String[] args) {
+		
+		// XML 파일 읽어오기 (Properties, FileInputStream)
+		
+		try {
+			Properties prop = new Properties();
+			
+			// driver.xml 파일 읽어오기 위한 InputStream 객체 생성
+			
+			FileInputStream fis = new FileInputStream("driver.xml");
+			
+			prop.loadFromXML(fis);
+			
+			System.out.println(prop);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+	}
+}
