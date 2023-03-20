@@ -23,7 +23,7 @@ public class ServletEx3 extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// Post 방식은 문자 데티어가 깨질 수 있다.
+		// Post 방식은 문자 데이터가 깨질 수 있다.
 		// -> 왜? 브라우저, 서버간의 문자 인코딩 차이 때문에
 		// 해결방법 : 요청 정보에 담긴 데이터의 문자 인코딩을 UTF-8로 변경
 		req.setCharacterEncoding("UTF-8");

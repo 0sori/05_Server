@@ -29,7 +29,7 @@
   	<url-pattern>/example1.do</url-pattern>
   </servlet-mapping>
   
-  
+  <!-- 111111111111111111111111111111111111111111111111111111111111111111111 -->
   <!-- example2.do 요청에 대한 Servlet 연결 -->
   <servlet>
   	<servlet-name>ex2</servlet-name>
