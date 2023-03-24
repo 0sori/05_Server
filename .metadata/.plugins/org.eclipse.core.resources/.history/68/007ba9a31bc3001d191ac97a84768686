@@ -1,5 +1,0 @@
-package edu.kh.jdbc.model.service;
-
-public class TestService {
-	// Service : 비즈니스 로직 (데이터가공, 트랜잭션 제어) 처리
-}
