@@ -2,7 +2,9 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<comment>member-sql.xml</comment>
-	
+
+		<!--  ;은 무조건 빼야함 -->
+
 	<!-- 회원 정보 조회 -->
 	<entry key="selectOne">
 		SELECT MEMBER_EMAIL, MEMBER_NICK, MEMBER_TEL, MEMBER_ADDR,
@@ -12,11 +14,20 @@
 		AND SECESSION_FL = 'N'
 	</entry>
 	
-	
-	<entry key="selectAll">
-		SELECT MEMBER_NO, MEMBER_EMAIL,MEMBER_NICK 
+	<entry key="selectAll">		
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICK
 		FROM MEMBER
 		WHERE SECESSION_FL = 'N'
 	</entry>
 	
+	<!-- 로그인(비밀번호, 탈툉부 제외) -->
+	<entry key="login">
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICK, MEMBER_TEL,
+		MEMBER_ADDR, PROFILE_IMG,
+		TO_CHAR(ENROLL_DT, 'YYYY-MM-DD HH24:MI:SS') AS ENROLL_DT
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = ?
+		AND MEMBER_PW = ?
+		AND SECESSION_FL = 'N'
+	</entry>
 </properties>

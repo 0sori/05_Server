@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <header>
     <section>
-    	
+    
     	<%-- 
     		<%= request.getContextPath() %>
     		${pageContext.servletContext.contextPath}
-    	
     		
-    	--%>
-    	
+    	 --%>
+    
+    
         <!-- 클릭 시 메인페이지로 이동하는 로고 -->
         <a href="${contextPath}">
             <img src="${contextPath}/resources/images/logo.jpg" id="home-logo">
@@ -23,9 +23,8 @@
             <!-- 내부 input 태그의 값을 서버 또는 페이지로 전달(제출) -->
             <form action="#">
                 <fieldset>
-                    <input type="text" id="query" name="query" 
-                        placeholder="검색어를 입력해주세요.">
-                    
+                    <input type="text" id="query" name="query" placeholder="검색어를 입력해주세요.">
+
                     <!-- 검색 버튼 -->
                     <button type="submit" id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                 </fieldset>
@@ -34,11 +33,8 @@
 
     </section>
 
-
-
     <section></section>
 </header>
-
 
 <nav>
     <ul>
