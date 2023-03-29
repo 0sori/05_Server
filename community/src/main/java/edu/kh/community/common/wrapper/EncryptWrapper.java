@@ -8,7 +8,7 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-public class EncryptWrapper extends HttpServletRequestWrapper {
+public class EncryptWrapper extends HttpServletRequestWrapper{
 	
 	// HttpServletRequestWrapper
 	// - 클라이언트 요청 객체 HttpServletRequest를 오버라이딩 하는 방법을 제공하는 클래스
@@ -19,16 +19,13 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 	// -> Wrapper 클래스 생성 시 반드시 HttpServletRequest 객체를 매개변수로 전달해야 한다!
 	public EncryptWrapper(HttpServletRequest request) {
 		super(request);
-		
 	}
 
-
-	// getParameter() 오버라이딩
 	
+	// getParameter() 오버라이딩
 	@Override
 	public String getParameter(String name) {
-		
-		// 매개변수 name :  input 태그의 name 속성 값
+		// 매개변수 name : input 태그의 name 속성 값
 		// super.getParameter(name) : 기존 getParameter() 메서드
 		
 		String value = null;
@@ -51,7 +48,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 	
 	
 	// 암호화 메서드(SHA-512 해시 함수)
-	// 해시 함수 : 어떤 문자열이든 일정한 길이의 무작위 문자열로 변환 하는 함수(중복X)
+	// 해시 함수 : 어떤 문자열이든 일정한 길이의 무작위 문자열로 변환하는 함수(중복X)
 	
 	private String getSha512(String pw) {
 		// 매개변수 pw : 암호화 되기 전 비밀번호
@@ -59,7 +56,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		// 암호화된 비밀번호 저장 변수
 		String encryptPw = null;
 		
-		// 1. 해시 함수를 수행할 객체를 참조할 변수 선언
+		// 1. 해시 함수를 수행할 객체를 참조 변수 선언
 		MessageDigest md = null;
 		
 		try {
@@ -73,22 +70,20 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 			md.update(bytes);
 			
 			// 5. 암호화된 비밀번호를 encryptPw에 대입
-			// ->byte[]을 String 변환할 필요가 있음
+			//  -> byte[]을 String 변환할 필요가 있음.
 			// Base64 : byte코드를 문자열로 변환하는 객체
 			encryptPw = Base64.getEncoder().encodeToString(md.digest());
 			
-			System.out.println("암호화 전 :" + pw);
-			System.out.println("암호화 후 :" + encryptPw);
+			System.out.println("암호화 전: " + pw);
+			System.out.println("암호화 후 : " + encryptPw);
 			
-		} catch (NoSuchAlgorithmException e) {
+		} catch(NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		
 		
 		return encryptPw;
 	}
-	
-	
 	
 	
 	
