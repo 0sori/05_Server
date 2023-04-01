@@ -75,8 +75,16 @@
 		SECESSION_FL = 'N'
 	</entry>
 
+	<entry key="updateProfileImage">
+		UPDATE MEMBER SET
+		PROFILE_IMG = ?
+		WHERE MEMBER_NO = ?
+	</entry>
 
-
+	<entry key="signUp">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MEMBER_NO.NEXTVAL , ? , ? , ? , ? , ?,DEFAULT, DEFAULT,DEFAULT)
+	</entry>
 
 
 

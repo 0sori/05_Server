@@ -262,6 +262,58 @@ public class MemberDAO {
 		
 		return result;
 	}
+
+	/** 프로필 이미지 변경 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @param profileImage
+	 * @return
+	 */
+	public int updateProfileImage(Connection conn, int memberNo, String profileImage) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateProfileImage");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, profileImage);
+			pstmt.setInt(2, memberNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int signUp(Connection conn, Member mem) throws Exception {
+		
+		int result = 0; // 결과 저장용 변수
+		 
+		try {
+			String sql = prop.getProperty("signUp");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mem.getMemberEmail());
+			pstmt.setString(2, mem.getMemberPw());
+			pstmt.setString(3, mem.getMemberNickname());
+			pstmt.setString(4, mem.getMemberTel());
+			pstmt.setString(5, mem.getMemberAddress());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		// 결과 반환
+		return result;
+	}
 	
 	
 	

@@ -108,6 +108,53 @@ public class MemberService {
 		
 		return result;
 	}
+
+	/** 프로필 이미지 변경 Service
+	 * @param memberNo
+	 * @param profileImage
+	 * @return
+	 */
+	public int updateProfileImage(int memberNo, String profileImage) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.updateProfileImage(conn, memberNo, profileImage);
+		
+		// 트랜잭션 제어 처리
+		if(result > 0) commit(conn);
+		else		   rollback(conn);
+		
+		close(conn);
+		
+		
+		
+		return result;
+	}
+
+	/** 회원가입 Service
+	 * @param mem
+	 * @return
+	 * @throws Exception
+	 */
+	public int signUp(Member mem) throws Exception {
+		
+		// 1) Connextion 얻어오기
+		Connection conn = getConnection();
+		
+		// 2) DAO 메소드 호출 후 결과 반환 받기
+		int result = dao.signUp(conn, mem);
+		
+		// 3) 트랜잭션 처리
+		// result가 0인 경우 -> DAO return 구문 잘못 작성
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		// 4) conn 반환(DBCP로 돌려주기)
+		close(conn);
+		
+		// 5) 결과반환
+		return result;
+	}
 	
 	
 	

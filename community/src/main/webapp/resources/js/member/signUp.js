@@ -14,6 +14,7 @@ const checkObj = {
 //  BEST | 회원가입 실제로 동작 하게끔 (INSERT > MEMBER)
 //  -> alert("가입이 완료되었습니다" or "유효성 검사가 통과되지 않았습니다")
 
+
 // 이메일 유효성 검사
 const memberEmail = document.getElementById("memberEmail");
 const emailMessage = document.getElementById("emailMessage");
@@ -328,11 +329,13 @@ memberNickname.addEventListener("input", function() {
     }
 });
 
+
+// 전화번호
 const memberTel = document.getElementById("memberTel");
 const telMessage = document.getElementById("telMessage");
 
 memberTel.addEventListener("input", function() {
-    const regExp = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4,4}$/;
+    const regExp = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/;
     if(regExp.test(memberTel.value)) {
         telMessage.innerText = "등록 가능한 번호 입니다" 
         telMessage.classList.add("confirm");
@@ -346,15 +349,43 @@ memberTel.addEventListener("input", function() {
 
         checkObj.memberTel = false;
     }
-})
+});
+
+// 회원가입
+function signUpValidate() {
+
+    // checkObj에 있는 모든 속성을 반복 접근하여
+    // false가 하나라도 있는 경우에는 form태그 기본 이벤트 제거
+
+    let str;
+
+    for (let key in checkObj) {
+
+        // 현재 접근 중인 key의 value가 false인 경우
+        if(!checkObj[key]) {
+
+            switch(key) {
+                case "memberemail": srt="이메일이"; break;
+                case "memberPw": srt="비밀번호가"; break;
+                case "memberPwConfirm": srt="비밀번호 확인이"; break;
+                case "memberNickname": srt="닉네임이"; break;
+                case "memberTel": srt="전화번호가"; break;
+            }
+
+            str = " 유효하지 않습니다.";
+
+            alert(str);
+
+            document.getElementById(key).focus();
+
+            return false; // form 태그 기본 이벤트 제거
+        }
 
 
-const signUpbtn = document.getElementById("signUp-btn");
-
-signUpbtn.addEventListener("click", function() {
-    if(checkObj = true) {
-        alert("가입이 완료되었습니다")
-    } else {
-        alert("유효성 검사가 통과되지 않았습니다")
     }
-})
+
+    return true; // form 태그 기본 이벤트 수행
+}
+
+
+
