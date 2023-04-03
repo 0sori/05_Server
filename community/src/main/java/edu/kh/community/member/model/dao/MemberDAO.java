@@ -262,6 +262,35 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	/** 전화번호 유효성 검사 DAO
+	 * @param conn
+	 * @param memberTel
+	 * @return
+	 * @throws Exception
+	 */
+	public int telDupCheck(Connection conn, String memberTel) throws Exception{
+		
+		int result = 0;
+	      try {
+	         String sql = prop.getProperty("telDupCheck");
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, memberTel);
+	         
+	         rs= pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	            result = rs.getInt(1);
+	         }
+	         
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }
+	      
+	      return result;
+	}
 
 	/** 프로필 이미지 변경 DAO
 	 * @param conn
@@ -314,6 +343,8 @@ public class MemberDAO {
 		// 결과 반환
 		return result;
 	}
+
+	
 	
 	
 	

@@ -1,4 +1,75 @@
 
+// 닉네임 수정하기
+const memberNickname = document.getElementById("memberNickname");
+const infoNicknameMessage = document.getElementById("infoNicknameMessage"); 
+
+memberNickname.addEventListener("input", function() {
+
+    console.log("sgsdgsdgsdgd")
+
+    // 입력이 되지 않은 경우
+    if(memberNickname.value.length == 0) {
+        infoNicknameMessage.innerText = "영어/숫자/한글 2~10글자 사이로 작성해주세요.";
+        infoNicknameMessage.classList.remove("confirm", "error");
+
+        return;
+    }
+
+    // 입력이 된 경우
+    const regExp = /^[a-z0-9가-힣]{2,10}/;
+    if( regExp.test(memberNickname.value) ) { // 유효한 경우
+        // ********** 이메일 중복 검사(ajax) 진행 예정***********
+
+        $.ajax({
+            url : "nicknameDupCheck",
+            // 필수속성 url
+            // 현재 주소 : /community/member/signUp
+            // 상대 경로 : /community/member/emailDupCheck
+
+            data: {"memberNickname" : memberNickname.value},
+            // data 속성 : 비동기 통신 시 서버로 전달한 값을 작성(JS 객체 형식)
+            // -> 비동기 통신 시 input에 입력된 값을
+            // "memberNickname" 이라는 key값(파라미터)으로 전달
+
+            success : function(result) {
+                // 비동기 통신(ajax)가 오류 없이 요청/응답 성공한 경우
+
+                // 매개변수 result : servlet에서 출력된 result 값이 담겨있음.
+                console.log(result);
+                
+                if(result == 1) { // 중복 O
+                    infoNicknameMessage.innerText = "이미 사용중인 닉네임 입니다.";
+                    infoNicknameMessage.classList.add("error");
+                    infoNicknameMessage.classList.remove("confirm");
+                    
+                
+                } else {  // 중복 X
+                    infoNicknameMessage.innerText = "사용 가능한 닉네임 입니다.";
+                    infoNicknameMessage.classList.remove("error");
+                    infoNicknameMessage.classList.add("confirm");
+                    
+                }
+                
+
+            },
+
+            error : function() {
+                // 비동기 통신(ajax)중 오류가 발생한 경우
+                console.log("에러 발생");
+            }
+
+        });
+
+    } else {
+        infoNicknameMessage.innerText = "닉네임 형식이 유효하지 않습니다.";
+        infoNicknameMessage.classList.add("error");
+        infoNicknameMessage.classList.remove("confirm");
+
+        
+    }
+});
+
+
 // 회원 프로필 이미지 변경()
 const inputImage = document.getElementById("input-image");
 
@@ -87,80 +158,12 @@ function profileValidate() {
     return true;
 }
 
-// 닉네임 수정하기
-const memberNickname = document.getElementById("memberNickname");
-const infoNicknameMessage = document.getElementById("infoNicknameMessage");
-
-memberNickname.addEventListener("input", function() {
-
-    // 입력이 되지 않은 경우
-    if(memberNickname.value.length == 0) {
-        infoNicknameMessage.innerText = "영어/숫자/한글 2~10글자 사이로 작성해주세요.";
-        infoNicknameMessage.classList.remove("confirm", "error");
-
-        return;
-    }
-
-    // 입력이 된 경우
-    const regExp = /^[a-z0-9가-힣]{2,10}/;
-    if( regExp.test(memberNickname.value) ) { // 유효한 경우
-        // ********** 이메일 중복 검사(ajax) 진행 예정***********
-
-        $.ajax({
-            url : "nicknameDupCheck",
-            // 필수속성 url
-            // 현재 주소 : /community/member/signUp
-            // 상대 경로 : /community/member/emailDupCheck
-
-            data: {"memberNickname" : memberNickname.value},
-            // data 속성 : 비동기 통신 시 서버로 전달한 값을 작성(JS 객체 형식)
-            // -> 비동기 통신 시 input에 입력된 값을
-            // "memberNickname" 이라는 key값(파라미터)으로 전달
-
-            success : function(result) {
-                // 비동기 통신(ajax)가 오류 없이 요청/응답 성공한 경우
-
-                // 매개변수 result : servlet에서 출력된 result 값이 담겨있음.
-                console.log(result);
-                
-                if(result == 1) { // 중복 O
-                    infoNicknameMessage.innerText = "이미 사용중인 닉네임 입니다.";
-                    infoNicknameMessage.classList.add("error");
-                    infoNicknameMessage.classList.remove("confirm");
-                    
-                
-                } else {  // 중복 X
-                    infoNicknameMessage.innerText = "사용 가능한 닉네임 입니다.";
-                    infoNicknameMessage.classList.remove("error");
-                    infoNicknameMessage.classList.add("confirm");
-                    
-                }
-                
-
-            },
-
-            error : function() {
-                // 비동기 통신(ajax)중 오류가 발생한 경우
-                console.log("에러 발생");
-            }
-
-        });
-
-    } else {
-        infoNicknameMessage.innerText = "닉네임 형식이 유효하지 않습니다.";
-        infoNicknameMessage.classList.add("error");
-        infoNicknameMessage.classList.remove("confirm");
-
-        
-    }
-});
-
 
 // 전화번호 수정
-const memberTel = document.getElementById("memberTel");
+const memberTel2 = document.getElementById("memberTel");
 const infotelMessage = document.getElementById("infotelMessage");
 
-memberTel.addEventListener("input", function() {
+memberTel2.addEventListener("input", function() {
     const regExp = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/;
     if(regExp.test(memberTel.value)) {
         infotelMessage.innerText = "등록 가능한 번호 입니다" 

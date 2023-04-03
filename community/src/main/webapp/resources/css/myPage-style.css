@@ -1,3 +1,7 @@
+.confirm{ color : green;}
+.error{  color : red;  }
+
+
 /* 마이페이지 영역 */
 .myPage-content{
     width: 1000px;

@@ -333,22 +333,48 @@ memberNickname.addEventListener("input", function() {
 // 전화번호
 const memberTel = document.getElementById("memberTel");
 const telMessage = document.getElementById("telMessage");
+memberTel.addEventListener("input",function(){
 
-memberTel.addEventListener("input", function() {
-    const regExp = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/;
-    if(regExp.test(memberTel.value)) {
-        telMessage.innerText = "등록 가능한 번호 입니다" 
-        telMessage.classList.add("confirm");
-        telMessage.classList.remove("error");
 
-        checkObj.memberTel = true;
-    } else {
-        telMessage.innerText = "등록 불가능한 번호 입니다" 
-        telMessage.classList.add("error");
-        telMessage.classList.remove("confirm");
+if(memberTel.value.length==0){
+   telMessage.innerText ="전화번호를 입력해주세요.(- 제외)";
+        
+    telMessage.classList.remove("confirm","error");
+    checkObj.memberTel = false; // 유효x 기록
+    return;
+}
 
-        checkObj.memberTel = false;
-    }
+const telExp =  /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/;
+
+if(telExp.test(memberTel.value)){
+    $.ajax({
+        url : "telDupCheck",
+        data : {"memberTel": memberTel.value},
+        success : function(result){
+            console.log(result);
+            if(result == 1){ // 중복
+                telMessage.innerText="이미 사용중인 전화번호입니다.";
+                telMessage.classList.add("error");
+                telMessage.classList.remove("confirm");
+                checkObj.memberTel = false;
+            }else{ // 중복x
+                telMessage.innerText="사용 가능한 전화번호입니다.";
+                telMessage.classList.remove("error");
+                telMessage.classList.add("confirm");
+                checkObj.memberTel= true; // 유효o 기록
+            }  
+        },
+        error : function(){
+            console.log("전화번호 등록 실패")
+        }
+    })
+}else{
+    telMessage.innerText ="올바른 전화번호가 아닙니다";
+    telMessage.classList.add("error");
+    telMessage.classList.remove("confirm");
+    
+    checkObj.memberTel = false; // 유효x 기록
+}
 });
 
 // 회원가입

@@ -16,6 +16,19 @@
   limitations under the License.
 --><!-- The contents of this file will be loaded for each web application --><Context>
 
+ <Resource 
+      name="jdbc/oracle" 
+      auth="Container"
+      type="javax.sql.DataSource" 
+      driverClassName="oracle.jdbc.OracleDriver"
+      url="jdbc:oracle:thin:@localhost:1521:xe"
+      username="community" 
+      password="1234" 
+      maxTotal="50"      
+      maxIdle="10"
+      maxWaitMillis="-1"
+    />
+
     <!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
@@ -42,18 +55,7 @@
       -->
     
     <!-- DBCP 세팅 -->   
-   <Resource 
-      name="jdbc/oracle" 
-      auth="Container"
-      type="javax.sql.DataSource" 
-      driverClassName="oracle.jdbc.OracleDriver"
-      url="jdbc:oracle:thin:@localhost:1521:xe"
-      username="community" 
-      password="1234" 
-      maxTotal="50"      
-      maxIdle="10"
-      maxWaitMillis="-1"
-    />
+  
     <!-- 
        name : JNDI 이름 Context의 lookup()을 사용하여 자원을 찾을때 사용한다. java:comp/env 디렉터리에서 찾을 수 있다.
        auth : 자원 관리 주체 지정(Application 또는 Container)

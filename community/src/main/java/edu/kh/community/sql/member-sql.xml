@@ -74,6 +74,12 @@
 		AND
 		SECESSION_FL = 'N'
 	</entry>
+	
+	<entry key = "telDupCheck">
+   		SELECT COUNT(*) FROM MEMBER 
+      	WHERE MEMBER_TEL = ?
+      	AND SECESSION_FL = 'N'
+   </entry>
 
 	<entry key="updateProfileImage">
 		UPDATE MEMBER SET
