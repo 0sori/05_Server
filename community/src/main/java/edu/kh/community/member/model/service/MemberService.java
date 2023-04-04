@@ -1,6 +1,7 @@
 package edu.kh.community.member.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import static edu.kh.community.common.JDBCTemplate.*;
 import edu.kh.community.member.model.dao.MemberDAO;
@@ -9,7 +10,13 @@ import edu.kh.community.member.model.vo.Member;
 public class MemberService {
 
 	private MemberDAO dao = new MemberDAO();
-
+	
+	
+	/** 회원정보 조회 Service
+	 * @param memberEmail
+	 * @return
+	 * @throws Exception
+	 */
 	public Member selectOne(String memberEmail) throws Exception {
 
 		Connection conn = getConnection();
@@ -19,6 +26,21 @@ public class MemberService {
 		close(conn);
 
 		return member;
+	}
+	
+	
+	/** 회원 목록 조회 Service
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Member> selectAll() throws Exception {
+		Connection conn = getConnection();
+		
+		List<Member> list = dao.selectAll(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 	/**
@@ -189,6 +211,80 @@ public class MemberService {
 		
 		return result;
 	}
+
+	
+
+	/** 비밀번호 변경 Service
+	 * @param currentPw
+	 * @param newPw
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int changePw(String currentPw, String newPw, int memberNo) throws Exception {
+		
+		Connection conn = getConnection(); // DBCP에서 얻어옴
+		
+		int result = dao.changePw(conn, currentPw, newPw, memberNo);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 내정보 수정 Service
+	 * @param mem
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateMember(Member mem) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updateMember(conn, mem);
+		
+		// 트랜잭션
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		// 종료
+		close(conn);
+		
+		
+		return result;
+	}
+
+	/** 회원 탈퇴 Service
+	 * @param memberNo
+	 * @param memberPw
+	 * @return
+	 * @throws Exception
+	 */
+	public int secession(int memberNo, String memberPw) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.secession(conn, memberNo, memberPw);
+		
+		if (result >0) commit(conn);
+		else  		   rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	
+
+	
+
+	
 	
 	
 	

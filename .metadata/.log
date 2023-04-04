@@ -6076,3 +6076,45 @@ npm notice
 
 !ENTRY org.eclipse.lsp4e 1 0 2023-04-03 14:05:46.720
 !MESSAGE [Info]	[lspserver] Using Typescript version (bundled) 4.6.4 from path "C:\tool\eclipse\plugins\org.eclipse.wildwebdeveloper_0.6.0.202206151321\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 16:03:53.722
+!MESSAGE [Info]	ESLint server running in node v16.14.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 16:03:54.108
+!MESSAGE [Info]	[lspserver] Using Typescript version (bundled) 4.6.4 from path "C:\tool\eclipse\plugins\org.eclipse.wildwebdeveloper_0.6.0.202206151321\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 16:03:59.650
+!MESSAGE [Info]	ESLint server running in node v16.14.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 16:03:59.938
+!MESSAGE [Info]	[lspserver] Using Typescript version (bundled) 4.6.4 from path "C:\tool\eclipse\plugins\org.eclipse.wildwebdeveloper_0.6.0.202206151321\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 16:10:12.654
+!MESSAGE [Info]	ESLint server running in node v16.14.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 16:10:12.978
+!MESSAGE [Info]	[lspserver] Using Typescript version (bundled) 4.6.4 from path "C:\tool\eclipse\plugins\org.eclipse.wildwebdeveloper_0.6.0.202206151321\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 17:02:39.388
+!MESSAGE [Info]	ESLint server running in node v16.14.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 17:02:39.720
+!MESSAGE [Info]	[lspserver] Using Typescript version (bundled) 4.6.4 from path "C:\tool\eclipse\plugins\org.eclipse.wildwebdeveloper_0.6.0.202206151321\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-03 17:07:04.523
+!MESSAGE [Info]	ESLint server running in node v16.14.2
+
+!ENTRY org.eclipse.wst.server.core 4 0 2023-04-03 17:23:39.617
+!MESSAGE Server community failed to start.
+
+!ENTRY org.eclipse.wst.server.core 4 0 2023-04-03 17:24:03.403
+!MESSAGE Server community failed to start.
+
+!ENTRY org.eclipse.wst.server.core 4 0 2023-04-03 17:24:28.181
+!MESSAGE Server community failed to start.
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-04 14:56:47.946
+!MESSAGE [Info]	ESLint server running in node v16.14.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-04 14:56:48.404
+!MESSAGE [Info]	[lspserver] Using Typescript version (bundled) 4.6.4 from path "C:\tool\eclipse\plugins\org.eclipse.wildwebdeveloper_0.6.0.202206151321\node_modules\typescript\lib\tsserver.js"

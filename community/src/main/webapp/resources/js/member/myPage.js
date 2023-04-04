@@ -1,75 +1,4 @@
 
-// 닉네임 수정하기
-const memberNickname = document.getElementById("memberNickname");
-const infoNicknameMessage = document.getElementById("infoNicknameMessage"); 
-
-memberNickname.addEventListener("input", function() {
-
-    console.log("sgsdgsdgsdgd")
-
-    // 입력이 되지 않은 경우
-    if(memberNickname.value.length == 0) {
-        infoNicknameMessage.innerText = "영어/숫자/한글 2~10글자 사이로 작성해주세요.";
-        infoNicknameMessage.classList.remove("confirm", "error");
-
-        return;
-    }
-
-    // 입력이 된 경우
-    const regExp = /^[a-z0-9가-힣]{2,10}/;
-    if( regExp.test(memberNickname.value) ) { // 유효한 경우
-        // ********** 이메일 중복 검사(ajax) 진행 예정***********
-
-        $.ajax({
-            url : "nicknameDupCheck",
-            // 필수속성 url
-            // 현재 주소 : /community/member/signUp
-            // 상대 경로 : /community/member/emailDupCheck
-
-            data: {"memberNickname" : memberNickname.value},
-            // data 속성 : 비동기 통신 시 서버로 전달한 값을 작성(JS 객체 형식)
-            // -> 비동기 통신 시 input에 입력된 값을
-            // "memberNickname" 이라는 key값(파라미터)으로 전달
-
-            success : function(result) {
-                // 비동기 통신(ajax)가 오류 없이 요청/응답 성공한 경우
-
-                // 매개변수 result : servlet에서 출력된 result 값이 담겨있음.
-                console.log(result);
-                
-                if(result == 1) { // 중복 O
-                    infoNicknameMessage.innerText = "이미 사용중인 닉네임 입니다.";
-                    infoNicknameMessage.classList.add("error");
-                    infoNicknameMessage.classList.remove("confirm");
-                    
-                
-                } else {  // 중복 X
-                    infoNicknameMessage.innerText = "사용 가능한 닉네임 입니다.";
-                    infoNicknameMessage.classList.remove("error");
-                    infoNicknameMessage.classList.add("confirm");
-                    
-                }
-                
-
-            },
-
-            error : function() {
-                // 비동기 통신(ajax)중 오류가 발생한 경우
-                console.log("에러 발생");
-            }
-
-        });
-
-    } else {
-        infoNicknameMessage.innerText = "닉네임 형식이 유효하지 않습니다.";
-        infoNicknameMessage.classList.add("error");
-        infoNicknameMessage.classList.remove("confirm");
-
-        
-    }
-});
-
-
 // 회원 프로필 이미지 변경()
 const inputImage = document.getElementById("input-image");
 
@@ -159,11 +88,65 @@ function profileValidate() {
 }
 
 
+// 닉네임 수정하기
+const memberNickname = document.getElementById("memberNickname");
+const infoNicknameMessage = document.getElementById("infoNicknameMessage"); 
+
+memberNickname.addEventListener("input", function() {
+    console.log("닉네임 변경중...");
+
+    // 입력이 되지 않은 경우
+    if(memberNickname.value.length == 0) {
+        infoNicknameMessage.innerText = "한글 2~10글자 사이로 작성해주세요.";
+        infoNicknameMessage.classList.remove("confirm", "error");
+        memberNickname.focus();
+        return false;
+    }
+
+    // 입력이 된 경우
+    const regExp = /^[a-z0-9가-힣]{2,10}/;
+    if( regExp.test(memberNickname.value) ) { // 유효한 경우
+
+        $.ajax({
+            url : "nicknameDupCheck",
+            data: {"memberNickname" : memberNickname.value},
+            
+            success : function(result) {
+               
+                console.log(result);
+                
+                if(result == 1) { // 중복 O
+                    infoNicknameMessage.innerText = "이미 사용중인 닉네임 입니다.";
+                    infoNicknameMessage.classList.add("error");
+                    infoNicknameMessage.classList.remove("confirm");  
+                } else {  // 중복 X
+                    infoNicknameMessage.innerText = "사용 가능한 닉네임 입니다.";
+                    infoNicknameMessage.classList.remove("error");
+                    infoNicknameMessage.classList.add("confirm");
+                }
+            },
+            error : function() {
+                // 비동기 통신(ajax)중 오류가 발생한 경우
+                console.log("에러 발생");
+            }
+        });
+    } else {
+        infoNicknameMessage.innerText = "닉네임 형식이 유효하지 않습니다.";
+        infoNicknameMessage.classList.add("error");
+        infoNicknameMessage.classList.remove("confirm");
+
+        
+    }
+});
+
 // 전화번호 수정
-const memberTel2 = document.getElementById("memberTel");
+const memberTel = document.getElementById("memberTel");
 const infotelMessage = document.getElementById("infotelMessage");
 
-memberTel2.addEventListener("input", function() {
+memberTel.addEventListener("input", function() {
+
+     console.log("dwdwd")
+
     const regExp = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/;
     if(regExp.test(memberTel.value)) {
         infotelMessage.innerText = "등록 가능한 번호 입니다" 
@@ -172,8 +155,134 @@ memberTel2.addEventListener("input", function() {
 
     } else {
         infotelMessage.innerText = "등록 불가능한 번호 입니다" 
-        infotelMessage.classList.add("error");
+        infotelMessage.classList.add("error"); 
         infotelMessage.classList.remove("confirm");
 
     }
 });
+
+// 수정하기 버튼 
+function infoValidate() {
+
+    // checkObj에 있는 모든 속성을 반복 접근하여
+    // false가 하나라도 있는 경우에는 form태그 기본 이벤트 제거
+
+    let str;
+
+    for (let key in myPageObj) {
+
+        // 현재 접근 중인 key의 value가 false인 경우
+        if(!myPageObj[key]) {
+
+            switch(key) {
+                
+                case "memberNickname": str="닉네임이"; break;
+                case "memberTel": str="전화번호가"; break;
+            }
+
+            str += " 유효하지 않습니다.";
+
+            alert(str);
+
+            document.getElementById(key).focus();
+
+            return false; // form 태그 기본 이벤트 제거
+        }
+
+
+    }
+    
+    alert("수정완료");
+
+    return true; // form 태그 기본 이벤트 수행
+}
+
+// 경고 출력 + 포커스 + false 반환  함수
+function printAlert(el, message){ // 매개변수 el은 요소
+    alert(message);
+    el.focus();
+    return false;
+}
+
+
+
+// 비밀번호 변경 제출 시 유효성 검사
+function changePwValidate(){
+
+    // 비밀번호 변경 관련 input 요소 얻어오기
+    const currentPw = document.getElementsByName("currentPw")[0];
+    
+    //const currentPw = document.getElementById("currentPw");
+
+    const newPw = document.getElementsByName("newPw")[0];
+    const newPwConfirm = document.getElementsByName("newPwConfirm")[0];
+
+    // 비밀번호 정규표현식
+    const regEx = /^[\w!@#_-]{6,30}$/;
+
+    // 현재 비밀번호 미작성
+    if(currentPw.value.trim().length == 0){
+        /*alert("현재 비밀번호를 입력해주세요.");
+        currentPw.focus();
+        return false;*/
+
+        return printAlert(currentPw, "현재 비밀번호를 입력해주세요.");
+    }
+
+    // 새 비밀번호
+    // 미작성
+    if(newPw.value.trim().length == 0){
+        alert("새 비밀번호를 입력해주세요.");
+        newPw.focus();
+        return false;
+    }
+
+    // 유효하지 않은 경우
+    if(!regEx.test(newPw.value)){
+        alert("영어, 숫자, 특수문자(!,@,#,-,_) 6~30 글자 사이로 작성해주세요.");
+        newPw.focus();
+        return false;
+    }
+
+
+    // 새 비밀번호 확인
+    // 미작성
+    if(newPwConfirm.value.trim().length == 0){
+        return printAlert(newPwConfirm, "새 비밀번호 확인을 입력해주세요.");
+    }
+
+
+    // 새 비밀번호 != 새 비밀번호 확인
+    if(newPw.value != newPwConfirm.value){
+        return printAlert(newPwConfirm, "새 비밀번호가 일치하지 않습니다.");
+    }
+
+    return true; // 위 조건을 모두 수행하지 않은 경우 true 반환
+}
+
+// 회원탈퇴 유효성 검사
+function secessionValidate() {
+
+    const memberPw = document.getElementById("memberPw");
+    const agree = document.getElementById("agree");
+
+    // 비밀번호 미작성
+    if(memberPw.value.length==0) {
+        alert("비밀번호를 기입해야 탈퇴가 가능합니다")
+        memberPw.focus();
+        return false;
+    }
+    // 약관동의체크 어그리
+    if(!agree.checked){
+        alert("약관동의를 체크해주셔야 탈퇴 가능합니다")
+        agree.focus();
+        return false;
+    }
+    // 정말 탈퇴할지 확인
+    if( !confirm("정말 탈퇴 하시겠습니까?") ){ //  취소를 누른 경우
+        return false;
+    }
+
+
+    return true;
+}

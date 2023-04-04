@@ -5,7 +5,7 @@ const checkObj = {
     "memberPwConfirm" : false, // 비밀번호와 일치하는지 확인
     "memberNickname" : false, // 영어/숫자/한글 2~10 글자 사이로 작성
     "memberTel" : false, // 제외
-    "sendEmail" : false,
+    "sendEmail" : false
     //"checkNumber" : false
 };
 
