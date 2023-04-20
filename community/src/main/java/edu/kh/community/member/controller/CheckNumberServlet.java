@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.kh.community.member.model.service.MemberService;
 
 @WebServlet("/member/checkNumber")
-public class CheckNumberServley extends HttpServlet {
+public class CheckNumberServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
